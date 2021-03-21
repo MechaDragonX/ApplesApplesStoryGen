@@ -155,10 +155,18 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // Populate the red deck's map using the contents of the first text file passed
-    populateDecks(argv[1]/*, 0, { 0, 1, 2, 3, 4, 5, 6 }*/);
-    // Populate the green deck's map using the contents of the second text file passed
-    populateDecks(argv[2], 1/*, { 0, 1, 2, 3, 4, 5, 6 }*/);
+    // Try Populating the red deck's map using the contents of the first text file passed
+    if(!populateDecks(argv[1]/*, 0, { 0, 1, 2, 3, 4, 5, 6 }*/)) {
+        // if it failed, print an error message
+        std::cout << "The text file passed for the red deck doesn't exist! Are you sure you spelled it right?" << std::endl;
+        return 1;
+    }
+    // Try Populating the green deck's map using the contents of the second text file passed
+    if(!populateDecks(argv[2], 1/*, { 0, 1, 2, 3, 4, 5, 6 }*/)) {
+        // if it failed, print an error message
+        std::cout << "The text file passed for the green deck doesn't exist! Are you sure you spelled it right?" << std::endl;
+        return 1;
+    }
 
     // Initialize RNG with current time as seed
     srand(time(nullptr));
@@ -172,4 +180,6 @@ int main(int argc, char** argv) {
     std::advance(iterator, rand() % GREEN.size());
     // Print out that random key and value
     std::cout << iterator->first + ": " + iterator->second << std::endl;
+
+    return 0;
 }
