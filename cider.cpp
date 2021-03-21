@@ -4,23 +4,22 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
-#include <unordered_set>
 #include <vector>
 
 /*
     Unordered Set of all possible game sets.
     More information on these sets can be found here: https://boardgamegeek.com/wiki/page/Apples_to_Apples_Series
 */
-static std::unordered_set<std::string> POSSIBLE_SETS = {
-    "Core",
-    "Expansion 1",
-    "Expansion 2",
-    "Expansion 3",
-    "Expansion 4",
+static std::vector<std::string> POSSIBLE_SETS = {
+    "Core Set",
+    "Core Expansion 1",
+    "Core Expansion 2",
+    "Core Expansion 3",
+    "Core Expansion 4",
     "Party Box",
     "Party Box Expansion 1",
-    "Kids",
-    "Junior"
+    "Kids Set",
+    "Junior Set"
 };
 
 /*
