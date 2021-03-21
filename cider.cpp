@@ -104,9 +104,12 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    // Populate the red deck's map using the contents of the first text file passed
     populateDecks(argv[1]);
+    // Populate the green deck's map using the contents of the second text file passed
     populateDecks(argv[2], 1);
 
+    // Try a random value as a test
     std::cout << "Computers: " + RED["Computers"] << std::endl;
     std::cout << "Silly: " + GREEN["Silly"] << std::endl;
 }
