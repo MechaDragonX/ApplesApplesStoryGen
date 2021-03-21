@@ -1,3 +1,5 @@
+#include <cstdlib>
+#include <ctime>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -109,7 +111,16 @@ int main(int argc, char** argv) {
     // Populate the green deck's map using the contents of the second text file passed
     populateDecks(argv[2], 1);
 
-    // Try a random value as a test
-    std::cout << "Computers: " + RED["Computers"] << std::endl;
-    std::cout << "Silly: " + GREEN["Silly"] << std::endl;
+    // Initialize RNG with current time as seed
+    srand(time(nullptr));
+    // Iterate to random key in Red deck
+    auto iterator = RED.begin();
+    std::advance(iterator, rand() % RED.size());
+    // Print out that random key and value
+    std::cout << iterator->first + ": " + iterator->second << std::endl;
+    // Iterate to random key in Green deck
+    iterator = GREEN.begin();
+    std::advance(iterator, rand() % GREEN.size());
+    // Print out that random key and value
+    std::cout << iterator->first + ": " + iterator->second << std::endl;
 }
