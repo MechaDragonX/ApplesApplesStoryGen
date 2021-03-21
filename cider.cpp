@@ -7,10 +7,10 @@
 #include <vector>
 
 /*
-    Unordered Set of all possible game sets.
+    Vector of all possible game sets.
     More information on these sets can be found here: https://boardgamegeek.com/wiki/page/Apples_to_Apples_Series
 */
-static std::vector<std::string> POSSIBLE_SETS = {
+static const std::vector<std::string> POSSIBLE_SETS = {
     "Core Set",
     "Core Expansion 1",
     "Core Expansion 2",
@@ -59,11 +59,11 @@ std::vector<std::string> splitStringByDelimiter(std::string& input, char delimit
     return result;
 }
 /*
-    Parameters: A path to the file to read and an int representing which deck to populate (0: Red, 1: Green). Set to Red by default
+    Parameters: A path to the file to read, an int representing which deck to populate (0: Red, 1: Green; Set to Red by default), and a vector of indices of accepted sets
     Returns: Success boolean
     Description: Read the provided file and populate the specified deck's map with its values
 */
-bool populateDecks(std::string path, int color = 0, std::vector<int>& acceptedSets = {}) {
+bool populateDecks(std::string path, int color = 0, const std::vector<int>& acceptedSets = {}) {
     std::ifstream inStream(path);
 
     if(!inStream.good()) {
@@ -73,6 +73,8 @@ bool populateDecks(std::string path, int color = 0, std::vector<int>& acceptedSe
 
     std::string line = "";
     std::vector<std::string> parts;
+    // If the current line is in an accept set
+    bool valid;
     // While the the stream still has lines in the file to look at
     while(!inStream.eof()) {
         getline(inStream, line);
@@ -80,11 +82,38 @@ bool populateDecks(std::string path, int color = 0, std::vector<int>& acceptedSe
         if(line != "") {
             // Get the parts of the current line: item and flavor text / synonyms
             parts = splitStringByDelimiter(line, '\t');
-            // Add them to the specified deck's map
-            if(color == 0) {
-                RED.insert({ parts[0], parts[1] });
+            // Check if the acceptedSets Vector is not empty
+            if(!acceptedSets.empty()) {
+                // Set validity flag to false whenever a new line is looked at
+                valid = false;
+                // if not, loop through every single provided index in acceptedSets
+                for(int index : acceptedSets) {
+                    // If an accepted set is found in the second part of the line
+                    if(parts[1].find(POSSIBLE_SETS[index]) != std::string::npos) {
+                        // If so, set validity to true and break
+                        valid = true;
+                        break;
+                    }
+                    /*
+                        The above conditional will only check to see if any one of the accepted sets appears in the line.
+                        If an accepted set and unaccepted set are both present, it will read that the accepted set is present, and set validity to true.
+                    */
+                }
             } else {
-                GREEN.insert({ parts[0], parts[1] });
+                // If acceptedSets is empty, then all sets are valid. Set validity bool to true
+                valid = true;
+            }
+
+            // If the current line is of a valid set
+            if(valid) {
+                // Add them to the specified deck's map
+                // if color == 0 then deck is red
+                if(color == 0) {
+                    RED.insert({ parts[0], parts[1] });
+                // else it is 1, which means deck is green
+                } else {
+                    GREEN.insert({ parts[0], parts[1] });
+                }
             }
         } else {
             // There's always a new line at the end of the file, so there's nothing to see if the current line is blank
@@ -127,9 +156,9 @@ int main(int argc, char** argv) {
     }
 
     // Populate the red deck's map using the contents of the first text file passed
-    populateDecks(argv[1]);
+    populateDecks(argv[1]/*, 0, { 0, 1, 2, 3, 4, 5, 6 }*/);
     // Populate the green deck's map using the contents of the second text file passed
-    populateDecks(argv[2], 1);
+    populateDecks(argv[2], 1/*, { 0, 1, 2, 3, 4, 5, 6 }*/);
 
     // Initialize RNG with current time as seed
     srand(time(nullptr));
