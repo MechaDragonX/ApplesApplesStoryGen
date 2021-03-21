@@ -82,12 +82,12 @@ int main(int argc, char** argv) {
 // If the program is running on Windows (does not apply to Cygwin, MSYS2, WSL, etc.)
 #ifdef WINNT
         // Give proper usage based on Command Prompt and Powershell
-        std::cout << "Usage on Command Prompt: cider.exe <link>" << std::endl;
-        std::cout << "Usage on PowerShell: .\\cider.exe <link>" << std::endl;
+        std::cout << "Usage on Command Prompt: cider.exe <text file for red deck> <text file for green deck>" << std::endl;
+        std::cout << "Usage on PowerShell: .\\cider.exe <text file for red deck> <text file for green deck>" << std::endl;
 // Otherwise, the user will most likely be on Unix
 #else
         // Give proper usage based on Unix
-        std::cout << "Usage: ./cider.out <link>" << std::endl;
+        std::cout << "Usage: ./cider.out <text file for red deck> <text file for green deck>" << std::endl;
 #endif
         return 1;
     }
@@ -96,12 +96,12 @@ int main(int argc, char** argv) {
 // If the program is running on Windows (does not apply to Cygwin, MSYS2, WSL, etc.)
 #ifdef WINNT
         // Give proper usage based on Command Prompt and Powershell
-        std::cout << "Usage on Command Prompt: cider.exe <link>" << std::endl;
-        std::cout << "Usage on PowerShell: .\\cider.exe <link>" << std::endl;
+        std::cout << "Usage on Command Prompt: cider.exe <text file for red deck> <text file for green deck>" << std::endl;
+        std::cout << "Usage on PowerShell: .\\cider.exe <text file for red deck> <text file for green deck>" << std::endl;
 // Otherwise, the user will most likely be on Unix
 #else
         // Give proper usage based on Unix
-        std::cout << "Usage: ./cider.out <link>" << std::endl;
+        std::cout << "Usage: ./cider.out <text file for red deck> <text file for green deck>" << std::endl;
 #endif
         return 1;
     }
