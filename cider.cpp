@@ -4,7 +4,20 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
+
+static std::unordered_set<std::string> POSSIBLE_SETS = {
+    "Basic",
+    "Expansion 1",
+    "Expansion 2",
+    "Expansion 3",
+    "Expansion 4",
+    "Party Box",
+    "Party Box Expansion 1",
+    "Kids",
+    "Junior"
+};
 
 // Unordered Map of all red cards. Red cards contain nouns.
 // Noun => Flavor Text
