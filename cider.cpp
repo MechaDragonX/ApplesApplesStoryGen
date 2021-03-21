@@ -63,7 +63,7 @@ std::vector<std::string> splitStringByDelimiter(std::string& input, char delimit
     Returns: Success boolean
     Description: Read the provided file and populate the specified deck's map with its values
 */
-bool populateDecks(std::string path, int color = 0) {
+bool populateDecks(std::string path, int color = 0, std::vector<int>& acceptedSets = {}) {
     std::ifstream inStream(path);
 
     if(!inStream.good()) {
