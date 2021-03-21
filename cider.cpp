@@ -8,7 +8,7 @@
 #include <vector>
 
 static std::unordered_set<std::string> POSSIBLE_SETS = {
-    "Basic",
+    "Core",
     "Expansion 1",
     "Expansion 2",
     "Expansion 3",
