@@ -7,6 +7,10 @@
 #include <unordered_set>
 #include <vector>
 
+/*
+    Unordered Set of all possible game sets.
+    More information on these sets can be found here: https://boardgamegeek.com/wiki/page/Apples_to_Apples_Series
+*/
 static std::unordered_set<std::string> POSSIBLE_SETS = {
     "Core",
     "Expansion 1",
@@ -19,11 +23,15 @@ static std::unordered_set<std::string> POSSIBLE_SETS = {
     "Junior"
 };
 
-// Unordered Map of all red cards. Red cards contain nouns.
-// Noun => Flavor Text
+/*
+    Unordered Map of all red cards. Red cards contain nouns.
+    Noun => Flavor Text
+*/
 static std::unordered_map<std::string, std::string> RED = {};
-// Unordered Map of all green cards. Green cards contain adjectives.
-// Adjective => Synonyms
+/*
+    Unordered Map of all green cards. Green cards contain adjectives.
+    Adjective => Synonyms
+*/
 static std::unordered_map<std::string, std::string> GREEN = {};
 
 // Taken from BambooCutterLayover (https://github.com/MechaDragonX/BambooCutterLayover)
